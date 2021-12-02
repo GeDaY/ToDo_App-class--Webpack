@@ -9,16 +9,16 @@ class ToDoSaver {
     this.handleAfterReload = this.#handleAfterReload.bind(this)
 
     window.addEventListener('beforeunload', this.handleBeforeUnload)
-    window.addEventListener('DOMContentLoaded', this.handleAfterReload)
+    window.addEventListener('loaded', this.handleAfterReload)
   }
 
   #handleBeforeUnload() {
     const json = JSON.stringify(this.data)
-    localStorage.setItem('this.data', json)
+    localStorage.setItem('data', json)
   }
 
   #handleAfterReload() {
-    const dataStorage = localStorage.getItem('this.data')
+    const dataStorage = localStorage.getItem('data')
 
     if (dataStorage) {
       this.data = JSON.parse(dataStorage)
