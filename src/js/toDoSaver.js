@@ -1,7 +1,6 @@
-import { data } from './toDoForm'
-
 class ToDoSaver {
-  constructor() {
+  constructor(data) {
+    this.data = data
     this.#init()
   }
 
@@ -14,15 +13,15 @@ class ToDoSaver {
   }
 
   #handleBeforeUnload() {
-    const json = JSON.stringify(data)
-    localStorage.setItem('data', json)
+    const json = JSON.stringify(this.data)
+    localStorage.setItem('this.data', json)
   }
 
   #handleAfterReload() {
-    const dataStorage = localStorage.getItem('data')
+    const dataStorage = localStorage.getItem('this.data')
 
     if (dataStorage) {
-      data = JSON.parse(dataStorage)
+      this.data = JSON.parse(dataStorage)
 
       const eventRenderAfterReload = new Event('render:needAfterReload')
       window.dispatchEvent(eventRenderAfterReload)
@@ -30,4 +29,4 @@ class ToDoSaver {
   }
 }
 
-new ToDoSaver()
+export { ToDoSaver }

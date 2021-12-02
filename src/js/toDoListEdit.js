@@ -1,12 +1,9 @@
-import { data } from './toDoForm'
-
-const listElem = document.querySelector('#list')
-
 class ToDoListEdit {
   editedTodo = {}
   isEdit = false
 
-  constructor(listElem) {
+  constructor(listElem, data) {
+    this.data = data
     this.listElem = listElem
     this.#init()
   }
@@ -31,7 +28,7 @@ class ToDoListEdit {
         return
       }
 
-      data.forEach((item) => {
+      this.data.forEach((item) => {
         if (item.id == id) {
           this.editedTodo = item
 
@@ -103,4 +100,4 @@ class ToDoListEdit {
   }
 }
 
-new ToDoListEdit(listElem)
+export { ToDoListEdit }

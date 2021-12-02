@@ -1,10 +1,9 @@
-export let data = []
-
-const formElem = document.querySelector('#form')
+import { formElem } from './app'
 
 class ToDoFormCreate {
-  constructor(formElement) {
+  constructor(formElement, data) {
     this.formElement = formElement
+    this.data = data
     this.#init()
   }
 
@@ -27,7 +26,7 @@ class ToDoFormCreate {
       todo[name] = value
     }
 
-    data.push(todo)
+    this.data.push(todo)
     formElem.reset()
 
     const eventRender = new Event('render:need')
@@ -35,4 +34,4 @@ class ToDoFormCreate {
   }
 }
 
-new ToDoFormCreate(formElem)
+export { ToDoFormCreate }

@@ -1,10 +1,7 @@
-import { data } from './toDoForm'
-
-const listElem = document.querySelector('#list')
-
 class ToDoList {
-  constructor(listElem) {
+  constructor(listElem, data) {
     this.listElem = listElem
+    this.data = data
     this.#init()
   }
 
@@ -26,7 +23,7 @@ class ToDoList {
 
     if (type != 'checkbox') return
 
-    data.forEach((item) => {
+    this.data.forEach((item) => {
       if (item.id == id) {
         item.isChecked = checked
       }
@@ -39,7 +36,7 @@ class ToDoList {
     const { role, id } = event.target.dataset
 
     if (role == 'delete') {
-      data = data.filter((item) => item.id != id)
+      this.data = this.data.filter((item) => item.id != id)
 
       this.render()
     }
@@ -76,7 +73,7 @@ class ToDoList {
   toDoElements() {
     let result = ''
 
-    data.forEach((todo) => {
+    this.data.forEach((todo) => {
       result = result + this.template(todo)
     })
 
@@ -89,4 +86,4 @@ class ToDoList {
   }
 }
 
-new ToDoList(listElem)
+export { ToDoList }

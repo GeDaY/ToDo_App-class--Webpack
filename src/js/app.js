@@ -1,13 +1,17 @@
 import '../sass/style.scss'
 
-// class ToDoSaver
-import './toDoSaver'
+import { ToDoSaver } from './toDoSaver'
+import { ToDoFormCreate } from './toDoForm'
+import { ToDoList } from './toDoList'
+import { ToDoListEdit } from './toDoListEdit'
 
-// class ToDoFormCreate
-import './toDoForm'
+const data = []
+const listElem = document.querySelector('#list')
+const formElem = document.querySelector('#form')
 
-// class ToDoList
-import './toDoList'
+new ToDoSaver(data)
+new ToDoFormCreate(formElem, data)
+new ToDoList(listElem, data)
+new ToDoListEdit(listElem, data)
 
-// class ToDoListEdit
-import './toDoListEdit'
+export { formElem }
