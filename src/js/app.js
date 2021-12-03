@@ -13,5 +13,3 @@ new ToDoFormCreate(formElem, data)
 new ToDoList(listElem, data)
 new ToDoListEdit(listElem, data)
 new ToDoSaver(data)
-
-export { formElem }

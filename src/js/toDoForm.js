@@ -1,5 +1,3 @@
-import { formElem } from './app'
-
 class ToDoFormCreate {
   constructor(formElement, data) {
     this.formElement = formElement
@@ -21,13 +19,13 @@ class ToDoFormCreate {
       isCheked: false,
     }
 
-    const formData = new FormData(formElem)
+    const formData = new FormData(this.formElement)
     for (let [name, value] of formData.entries()) {
       todo[name] = value
     }
 
     this.data.push(todo)
-    formElem.reset()
+    this.formElement.reset()
 
     const eventRender = new Event('render:need')
     window.dispatchEvent(eventRender)
