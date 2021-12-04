@@ -1,7 +1,7 @@
 class ToDoFormCreate {
-  constructor(formElement, data) {
-    this.formElement = formElement
+  constructor(data, formElement) {
     this.data = data
+    this.formElement = formElement
     this.#init()
   }
 
@@ -27,8 +27,8 @@ class ToDoFormCreate {
     this.data.push(todo)
     this.formElement.reset()
 
-    const eventRender = new Event('render:need')
-    window.dispatchEvent(eventRender)
+    window.dispatchEvent(new Event('render:need'))
+    window.dispatchEvent(new Event('save:need'))
   }
 }
 

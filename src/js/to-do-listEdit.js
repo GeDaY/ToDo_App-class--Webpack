@@ -2,7 +2,7 @@ class ToDoListEdit {
   editedTodo = {}
   isEdit = false
 
-  constructor(listElem, data) {
+  constructor(data, listElem) {
     this.data = data
     this.listElem = listElem
     this.#init()
@@ -33,9 +33,8 @@ class ToDoListEdit {
           this.editedTodo = item
 
           const { parentElement } = target
-          const editTodo = this.template(item)
 
-          parentElement.outerHTML = editTodo
+          parentElement.outerHTML = this.template(item)
 
           this.isEdit = true
         }
@@ -54,7 +53,8 @@ class ToDoListEdit {
 
       this.editedTodo.todo_content = editedContent
 
-      this.renderEditListElem()
+      window.dispatchEvent(new Event('render:need'))
+      window.dispatchEvent(new Event('save:need'))
 
       this.isEdit = false
     }
@@ -63,7 +63,7 @@ class ToDoListEdit {
   #handleClickCancelBtn(event) {
     const { role } = event.target.dataset
     if (role == 'cancelEdit') {
-      this.renderEditListElem()
+      window.dispatchEvent(new Event('render:need'))
 
       this.isEdit = false
     }
@@ -92,11 +92,6 @@ class ToDoListEdit {
     </form>
   `
     return template
-  }
-
-  renderEditListElem() {
-    const eventRenderEditlistElem = new Event('render:needEditListElem')
-    window.dispatchEvent(eventRenderEditlistElem)
   }
 }
 

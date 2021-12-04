@@ -1,7 +1,7 @@
 class ToDoList {
-  constructor(listElem, data) {
-    this.listElem = listElem
+  constructor(data, listElem) {
     this.data = data
+    this.listElem = listElem
     this.#init()
   }
 
@@ -13,8 +13,9 @@ class ToDoList {
     this.listElem.addEventListener('change', this.handleChange)
     this.listElem.addEventListener('click', this.handleclickDelBtn)
     window.addEventListener('render:need', this.handleRenderNeed)
-    window.addEventListener('render:needEditListElem', this.handleRenderNeed)
-    window.addEventListener('render:needAfterReload', this.handleRenderNeed)
+
+    const event = new Event('app:ready')
+    window.dispatchEvent(event)
   }
 
   #handleChange(event) {
@@ -29,14 +30,17 @@ class ToDoList {
       }
     })
 
+    window.dispatchEvent(new Event('save:need'))
+
     this.render()
   }
 
   #handleclickDelBtn(event) {
     const { role, id } = event.target.dataset
-
     if (role == 'delete') {
       this.data = this.data.filter((item) => item.id != id)
+
+      localStorage.setItem('appData', JSON.stringify(this.data))
 
       this.render()
     }
@@ -73,16 +77,15 @@ class ToDoList {
   toDoElements() {
     let result = ''
 
-    this.data.forEach((todo) => {
-      result = result + this.template(todo)
+    this.data.forEach((item) => {
+      result = result + this.template(item)
     })
 
     return result
   }
 
   render() {
-    const todoElements = this.toDoElements()
-    this.listElem.innerHTML = todoElements
+    this.listElem.innerHTML = this.toDoElements()
   }
 }
 
