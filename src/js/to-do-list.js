@@ -1,3 +1,4 @@
+/* eslint-disable */
 class ToDoList {
   constructor(data, listElem) {
     this.data = data
@@ -30,17 +31,22 @@ class ToDoList {
       }
     })
 
-    window.dispatchEvent(new Event('save:need'))
-
     this.render()
   }
 
   #handleclickDelBtn(event) {
     const { role, id } = event.target.dataset
-    if (role == 'delete') {
-      this.data = this.data.filter((item) => item.id != id)
 
-      localStorage.setItem('appData', JSON.stringify(this.data))
+    if (role == 'delete') {
+      let deletedItemIndex = 0
+
+      this.data.forEach((item, index) => {
+        if ((item.id = id)) {
+          deletedItemIndex = index
+        }
+      })
+
+      this.data.splice(deletedItemIndex, 1)
 
       this.render()
     }

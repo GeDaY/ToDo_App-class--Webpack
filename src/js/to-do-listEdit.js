@@ -1,3 +1,4 @@
+/* eslint-disable */
 class ToDoListEdit {
   editedTodo = {}
   isEdit = false
@@ -54,7 +55,6 @@ class ToDoListEdit {
       this.editedTodo.todo_content = editedContent
 
       window.dispatchEvent(new Event('render:need'))
-      window.dispatchEvent(new Event('save:need'))
 
       this.isEdit = false
     }

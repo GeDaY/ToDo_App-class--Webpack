@@ -1,3 +1,4 @@
+/* eslint-disable */
 class ToDoStorage {
   data = JSON.parse(localStorage.getItem('appData')) || []
 
@@ -6,14 +7,14 @@ class ToDoStorage {
   }
 
   #init() {
-    this.handleSave = this.#handleSave.bind(this)
+    this.handleBeforeUnload = this.#handleBeforeUnload.bind(this)
     this.handleAppReady = this.#handleAppReady.bind(this)
 
-    window.addEventListener('save:need', this.handleSave)
+    window.addEventListener('beforeunload', this.handleBeforeUnload)
     window.addEventListener('app:ready', this.handleAppReady)
   }
 
-  #handleSave() {
+  #handleBeforeUnload() {
     localStorage.setItem('appData', JSON.stringify(this.data))
   }
 

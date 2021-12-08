@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import '../sass/style.scss'
 
 import { ToDoList } from './to-do-list'

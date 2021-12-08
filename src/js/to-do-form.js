@@ -1,3 +1,4 @@
+/* eslint-disable */
 class ToDoFormCreate {
   constructor(data, formElement) {
     this.data = data
@@ -28,7 +29,6 @@ class ToDoFormCreate {
     this.formElement.reset()
 
     window.dispatchEvent(new Event('render:need'))
-    window.dispatchEvent(new Event('save:need'))
   }
 }
 
